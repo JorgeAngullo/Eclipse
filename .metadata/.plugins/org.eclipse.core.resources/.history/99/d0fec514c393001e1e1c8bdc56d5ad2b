@@ -1,0 +1,172 @@
+package com.proyecto.peguis.dao;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.stereotype.Component;
+
+import com.proyecto.peguis.entities.Convocatoria;
+import com.proyecto.peguis.entities.Expediente;
+import com.proyecto.peguis.repositories.ConvocatoriaRepositorio;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+
+@Component
+public class ConvocatoriaDao implements ConvocatoriaRepositorio {
+	
+	@PersistenceContext
+	EntityManager entityManager;
+	CriteriaQuery<Convocatoria> criteriaQuery;
+	
+	@Override
+//	public List<Convocatoria> buscarPorCriterios(Map<String, Object> filtro) {
+	public List<Convocatoria> buscarPorCriterios(String filtro) {
+		
+		Map<String, Object> filtroParsed = parseFiltro(filtro);		
+		
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		criteriaQuery = criteriaBuilder.createQuery(Convocatoria.class);
+		// SELECT * FROM CONVOCATORIA
+		Root<Convocatoria> root = criteriaQuery.from(Convocatoria.class);
+		Join<Convocatoria, Expediente> join = root.join("expediente", JoinType.INNER);
+		List<Predicate> predicates = new ArrayList<Predicate>();
+
+//		criteriaQuery.where(criteriaBuilder.equal(join.get("expAnyo"), "2022"));
+//		criteriaQuery.where(criteriaBuilder.equal(join.get("expTipo"), "A"));
+		
+//		filtroParsed.forEach((c,v) -> {
+//			criteriaQuery.where(criteriaBuilder.equal(join.get(c), v.toString()));
+//		});
+		
+		for(String s : filtroParsed.keySet()) {
+			if (filtroParsed.get(s) instanceof String ) {
+//				criteriaQuery.where(criteriaBuilder.and(criteriaBuilder.equal(join.get(s), filtroParsed.get(s).toString())));
+				criteriaQuery.where(criteriaBuilder.and(criteriaBuilder.equal(join.get("expNumero"), "0001")));
+			}
+			
+			if (filtroParsed.get(s) instanceof Integer ) {
+				criteriaQuery.where(criteriaBuilder.equal(join.get(s), filtroParsed.get(s)));
+			}
+		}
+		
+//		// preparar WHERE
+//		filtro.forEach((key, value) -> {
+//			predicates.add(criteriaBuilder.equal(root.get(key), value));
+//			criteriaQuery.where(criteriaBuilder.equal(root.get(key), value));
+//			}
+//		);
+
+		TypedQuery<Convocatoria> query = entityManager.createQuery(criteriaQuery);
+		List<Convocatoria> convs = query.getResultList();
+		
+		convs.forEach(conv -> {System.out.println(conv);});
+//		return query.getResultList();
+		return convs;
+	}
+//
+//	@Override
+//	public List<Convocatoria> findAll() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Optional<Convocatoria> findById(Long id) {
+//		// TODO Auto-generated method stub
+//		return Optional.empty();
+//	}
+//
+//	@Override
+//	public Convocatoria save(Convocatoria convocatoria) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public void delete(Convocatoria convocatoria) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public List<Convocatoria> buscarPorCriterios(Map<Object, Object> filtro) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	@Override
+	public List<Convocatoria> findAll() {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		criteriaQuery = criteriaBuilder.createQuery(Convocatoria.class);
+		Root<Convocatoria> root = criteriaQuery.from(Convocatoria.class);
+		criteriaQuery.select(root);
+		
+		TypedQuery<Convocatoria> query = entityManager.createQuery(criteriaQuery);
+		return query.getResultList();
+	}
+
+	@Override
+	public Optional<Convocatoria> findById(Long id) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+
+	@Override
+	public Convocatoria save(Convocatoria convocatoria) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(Convocatoria convocatoria) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private Map<String, Object> parseFiltro(String filtro) {
+		Map<String, Object> filtroParsed = new HashMap<String, Object>();
+		
+		// contenido filtro: {"nombreVariableEnAngular":"key1:value1";"key2:value2"[;"key3:value3"]}
+		filtro = filtro.substring(2); // quito la llave { y las comillas ". Queda nombreVariableEnAngular":"key1:value1";"key2:value2"[;"key3:value3"]}
+		filtro = filtro.substring(filtro.indexOf("\"") + 2); // Quito nombreVariableEnAngular":. Queda "key1:value1";"key2:value2"[;"key3:value3"]}
+		filtro = filtro.substring(0, filtro.length()-1); // Quito la llave } final. Queda "key1:value1";"key2:value2"[;"key3:value3"]
+		
+		filtro = filtro.replace("\"", ""); // Quito todas las comillas "
+		
+		List<String> pares = Arrays.asList(filtro.split(";"));
+		
+		for(String par : pares) {
+			List<String> claveValor = Arrays.asList(par.split(":"));
+			
+			String clave = claveValor.get(0);
+			String valor = claveValor.get(1);
+			
+			filtroParsed.put(clave, valor);
+			
+			System.out.println(clave + ": " + valor);
+		}
+		
+		pares.forEach(par -> {
+			String clave = par.substring(0, par.indexOf(":"));
+			String valor = par.substring(par.indexOf(":")+1);
+			filtroParsed.put(clave, valor);
+			System.out.println(clave + ": " + valor);
+		});
+		
+		
+		return filtroParsed;
+		
+	}
+}

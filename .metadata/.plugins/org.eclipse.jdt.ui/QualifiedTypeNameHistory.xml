@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.hibernate.annotations.Table"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Temporal"/>
+    <fullyQualifiedTypeName name="org.hibernate.annotations.NamedQuery"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.TemporalType"/>
+    <fullyQualifiedTypeName name="services.ConvocatoriaService"/>
+    <fullyQualifiedTypeName name="services.ConvocatoriaRepositorio"/>
+    <fullyQualifiedTypeName name="org.springframework.data.repository.Repository"/>
+    <fullyQualifiedTypeName name="com.proyecto.peguis.ConvocatoriaRepositorio"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
+    <fullyQualifiedTypeName name="repositories.ConvocatoriaRepositorio"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.config.annotation.CorsRegistry"/>
+    <fullyQualifiedTypeName name="org.springframework.data.annotation.Id"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+    <fullyQualifiedTypeName name="org.hibernate.query.Query"/>
+    <fullyQualifiedTypeName name="org.hibernate.Session"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.provider.HibernateUtils"/>
+    <fullyQualifiedTypeName name="org.hibernate.internal.build.AllowSysOut"/>
+    <fullyQualifiedTypeName name="com.proyecto.peguis.repositories.ConvocatoriaRepositorio"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.criteria.JoinType"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.criteria.Join"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonBackReference"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.criteria.Predicate"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="com.proyecto.peguis.repositories.EstadoConvocatoriaRepositorio"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Sort.Direction"/>
+    <fullyQualifiedTypeName name="org.hibernate.query.Order"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Sort.Order"/>
+    <fullyQualifiedTypeName name="com.proyecto.peguis.services.ExpedienteService"/>
+    <fullyQualifiedTypeName name="com.proyecto.peguis.entities.SubtipoConvocatoria"/>
+    <fullyQualifiedTypeName name="com.proyecto.peguis.repositories.SubtipoConvocatoriaRepositorio"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Table"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.NamedQuery"/>
+    <fullyQualifiedTypeName name="com.proyecto.peguis.repositories.TipoSubtipoConvocatoriaRepositorio"/>
+    <fullyQualifiedTypeName name="com.proyecto.peguis.entities.TipoSubtipoConvocatoriaPK"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+</qualifiedTypeNameHistroy>
